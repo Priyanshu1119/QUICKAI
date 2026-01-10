@@ -1,21 +1,16 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { SignIn, useUser } from "@clerk/clerk-react";
 
 const Layout = () => {
   const navigate = useNavigate();
-  const { user } = useUser(); // ✅ inside component
+
   const [sidebar, setSidebar] = useState(false);
 
-  // Redirect signed-in users to /ai automatically
-  useEffect(() => {
-    if (user) {
-      navigate("/ai"); // ✅ inside component
-    }
-  }, [user, navigate]);
+  const { user } = useUser();
 
   return user ? (
     <div className="flex flex-col items-start justify-start h-screen">
